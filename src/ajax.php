@@ -38,7 +38,7 @@
 				$stmt->execute();echo 'salvou';
 			}
 			else {
-					  echo 'nao salvou';
+				echo 'nao salvou';
 			}
 			registraLog($file, 'registerScore', _POSTToString($post));
 		} catch (Exception $e) {
@@ -58,6 +58,8 @@
 					echo "$name - $scoreGeral - <br>";
 				}
 			}
+		}catch (Exception $e) {
+			fwrite($file, $e->getMessage()."\n");
 		}
 
 	}
