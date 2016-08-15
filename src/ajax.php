@@ -35,10 +35,7 @@
 						
 			//pg_exec($conn, $query);
 			if ($stmt = $conn->prepare($query)){
-				$stmt->execute();echo 'salvou';
-			}
-			else {
-				echo 'nao salvou';
+				$stmt->execute();
 			}
 			registraLog($file, 'registerScore', _POSTToString($post));
 		} catch (Exception $e) {
@@ -50,6 +47,8 @@
 		global $conn;
 		try {
 			$query = " SELECT name, scoreGeral FROM scores GROUP BY nome ORDER BY $tipo DESC ";
+			echo $query;
+			return false;
 			if ($stmt = $conn->prepare($query)) {
 				$stmt->execute();
 				$stmt->bind_result($name, $scoreGeral);
