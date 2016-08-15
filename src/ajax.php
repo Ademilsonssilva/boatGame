@@ -4,6 +4,9 @@
 	include('connection.php');
 	$conn = Connection::getConnection();
 	
+	echo searchScoreBy('scoreGeral');
+	exit;
+	
 	$file = fopen("dblog.txt", "a+");
 	
 	if (!isset($_POST['action'])) {
@@ -46,13 +49,22 @@
 	function searchScoreBy($tipo){
 		global $conn;
 		try {
-			$query = " SELECT nome, $tipo FROM scores GROUP BY nome ORDER BY $tipo DESC ";
+			$query = "  SELECT nome, scoreTotal, qtdSubsDestruidos, scoreUnico, tempoJogo, tipoDispositivo
+						FROM scores GROUP BY nome ORDER BY $tipo DESC ";
+						
 			if ($stmt = $conn->prepare($query)) {
 				$stmt->execute();
-				$stmt->bind_result($name, $scoreGeral);
+				$stmt->bind_result(
+					$name, 
+					$scoreGeral, 
+					$qtdSubsDestruidos, 
+					$scoreUnico, 
+					$tempoJogo, 
+					$tipoDispositivo
+				);
 				
-				while ($stmt->fetch()) {
-					echo "$name - $scoreGeral - <br>";
+				while ($stmt->fetch_row()) {
+					//echo "$name - $scoreGeral - <br>";
 				}
 			}
 		}catch (Exception $e) {
