@@ -1,8 +1,22 @@
 <html>
 	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script src="scripts/scores.js"></script>
 		<title>BoatGame</title>
 	</head>
 	<body>
-		<h1>oi</h1>
+		<div style="width:20%;height:100%;background-color:#CCC;float:left;">
+			<h1> High Scores </h1>
+				<fieldset style="width:90%;">
+					<legend> <b> Filtrar por </b> </legend>
+					<input type="radio" class="tipoPesquisa" name="tipoPesquisa" id="tipoPesquisa1" value="scoreGeral" checked/> <label for="tipoPesquisa1">Score Geral</label><br>
+					<input type="radio" class="tipoPesquisa" name="tipoPesquisa" id="tipoPesquisa2" value="scoreUnico"/> <label for="tipoPesquisa2"> Score Unico </label><br> 
+					<input type="radio" class="tipoPesquisa" name="tipoPesquisa" id="tipoPesquisa3" value="scoreTempo"> <label for="tipoPesquisa3"> Pontuação por minuto </label><br>
+					<input type="radio" class="tipoPesquisa" name="tipoPesquisa" id="tipoPesquisa4" value="qtdeSubsDestruidos"> <label for="tipoPesquisa4"> Quantidade de submarinos destruídos </label><br> 
+				</fieldset>
+		</div>
+		
+		<div id="content" style="width:70%;height:100%;float:left;background-color:lightblue;margin-left:15px;"/>
+		
 	</body>
 </html>

@@ -14,6 +14,9 @@
 			case 'registerScore':
 				registerScore($_POST);
 				break;
+			case 'getRanking':
+				echo 'oi';
+				break;
 		}
 	}
 	
