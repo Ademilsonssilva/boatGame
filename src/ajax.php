@@ -46,9 +46,7 @@
 	function searchScoreBy($tipo){
 		global $conn;
 		try {
-			$query = " SELECT name, scoreGeral FROM scores GROUP BY nome ORDER BY $tipo DESC ";
-			echo $query;
-			return false;
+			$query = " SELECT nome, $tipo FROM scores GROUP BY nome ORDER BY $tipo DESC ";
 			if ($stmt = $conn->prepare($query)) {
 				$stmt->execute();
 				$stmt->bind_result($name, $scoreGeral);
