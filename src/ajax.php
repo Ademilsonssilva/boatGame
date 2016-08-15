@@ -15,7 +15,7 @@
 				registerScore($_POST);
 				break;
 			case 'getRanking':
-				echo 'oi';
+				searchScoreBy($_POST['type']);
 				break;
 		}
 	}
@@ -37,9 +37,9 @@
 			if ($stmt = $conn->prepare($query)){
 				$stmt->execute();echo 'salvou';
 			}
-                        else {
-                                echo 'nao salvou';
-                        }
+			else {
+					  echo 'nao salvou';
+			}
 			registraLog($file, 'registerScore', _POSTToString($post));
 		} catch (Exception $e) {
 			fwrite($file, $e->getMessage()."\n");
@@ -47,7 +47,19 @@
 	}
 	
 	function searchScoreBy($tipo){
-		$query = " SELECT * FROM scores GROUP BY nome ORDER BY $tipo DESC LIMIT 15 ";
+		global $conn;
+		try {
+			$query = " SELECT name, scoreGeral FROM scores GROUP BY nome ORDER BY $tipo DESC ";
+			if ($stmt = $conn->prepare($query)) {
+				$stmt->execute();
+				$stmt->bind_result($name, $scoreGeral);
+				
+				while ($stmt->fetch()) {
+					echo "$name - $scoreGeral - <br>";
+				}
+			}
+		}
+
 	}
 	
 	
