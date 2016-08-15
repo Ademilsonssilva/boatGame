@@ -4,9 +4,6 @@
 	include('connection.php');
 	$conn = Connection::getConnection();
 	
-	echo searchScoreBy('scoreGeral');
-	exit;
-	
 	$file = fopen("dblog.txt", "a+");
 	
 	if (!isset($_POST['action'])) {
@@ -18,7 +15,7 @@
 				registerScore($_POST);
 				break;
 			case 'getRanking':
-				searchScoreBy($_POST['type']);
+				echo searchScoreBy($_POST['type']);
 				break;
 		}
 	}
@@ -49,9 +46,10 @@
 	function searchScoreBy($tipo){
 		global $conn;
 		try {
-			$query = "  SELECT nome, scoreTotal, qtdSubsDestruidos, scoreUnico, tempoJogo, tipoDispositivo
+			$query = "  SELECT nome, scoreGeral, qtdSubsDestruidos, scoreUnico, tempoJogo, tipoDispositivo
 						FROM scores GROUP BY nome ORDER BY $tipo DESC ";
-						
+					
+			$array = [];
 			if ($stmt = $conn->prepare($query)) {
 				$stmt->execute();
 				$stmt->bind_result(
@@ -63,10 +61,20 @@
 					$tipoDispositivo
 				);
 				
-				while ($stmt->fetch_row()) {
-					//echo "$name - $scoreGeral - <br>";
+				while ($stmt->fetch()) {
+					$row = [
+						'nome' => $name,
+						'scoreTotal' => $scoreTotal,
+						'qtdSubsDestruidos' => $qtdSubsDestruidos,
+						'scoreUnico' => $scoreUnico,
+						'tempoJogo' => $tempoJogo,
+						'tipoDispositivo' => $tipoDispositivo,
+					];
+					
+					$array[] = $row;
 				}
 			}
+			return json_encode($array);
 		}catch (Exception $e) {
 			fwrite($file, $e->getMessage()."\n");
 		}
