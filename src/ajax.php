@@ -74,12 +74,16 @@
 					$passou = true;
 					
 					if ($mostrarTodos == 'false') {
-						foreach($array as $arr) {
-							if (!(strtoupper($row['nome']) == strtoupper($arr['nome']))) {
-								$array[] = $row;
-							} 
+						if (empty($array)) {
+							$array[] = $row;
 						}
-						
+						else {
+							foreach($array as $arr) {
+								if (!(strtoupper($row['nome']) == strtoupper($arr['nome']))) {
+									$array[] = $row;
+								} 
+							}
+						}
 					}else {
 						$array[] = $row;
 					}
