@@ -3,10 +3,13 @@ $(document).ready(function () {
 	$("input[name='tipoPesquisa']").on('change', function () {
 		atualizaTable();
 	});
+	
+	$("#mostrarTodos").on('change', function () {
+		atualizaTable();
+	});
 		
 	function atualizaTable() {
-		var mostrarTodos = $('#mostrarTudo').is(':checked');
-		alert(mostrarTodos);
+		var mostrarTodos = $('#mostrarTodos').is(':checked');
 		$("input[name='tipoPesquisa']").each(function () {
 			$(this).prop('disabled', 'disabled');
 		});
