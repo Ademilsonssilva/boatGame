@@ -64,7 +64,7 @@
 				while ($stmt->fetch()) {
 					$row = [
 						'nome' => $name,
-						'scoreTotal' => $scoreTotal,
+						'scoreGeral' => $scoreGeral,
 						'qtdSubsDestruidos' => $qtdSubsDestruidos,
 						'scoreUnico' => $scoreUnico,
 						'tempoJogo' => $tempoJogo,

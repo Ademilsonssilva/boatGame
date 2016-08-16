@@ -9,7 +9,13 @@ $(document).ready(function () {
 				'type' 	: $('.tipoPesquisa:checked').val(),
 				'mostrarTodos' : mostrarTodos,
 			},function (response) {
-				$('#content').html(response);
+				var tableRanking = $("<table class='tableRanking'></table>");
+				var json = $.parseJSON(response);
+				for(var it = 0; it < json.length; it++) {
+					var tr = "<tr><td>"+json[it].nome+"<td></tr>";
+					tableRanking.html(tr);
+				}
+				$('#content').html(tableRanking);
 			}
 		)
 		
