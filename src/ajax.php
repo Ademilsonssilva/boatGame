@@ -71,10 +71,15 @@
 						'tipoDispositivo' => $tipoDispositivo,
 					];
 					
+					$passou = true;
+					
 					if ($mostrarTodos == 'false') {
-						if (!in_array($row['nome'], $array)) {
-							$array[] = $row;
-						} 
+						foreach($array as $arr) {
+							if (!(strtoupper($row['nome']) == strtoupper($arr['nome']))) {
+								$array[] = $row;
+							} 
+						}
+						
 					}else {
 						$array[] = $row;
 					}
