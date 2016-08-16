@@ -15,6 +15,8 @@
 				registerScore($_POST);
 				break;
 			case 'getRanking':
+				echo $_POST['mostrarTodos'];
+				exit;
 				echo searchScoreBy($_POST['type'], $_POST['mostrarTodos']);
 				break;
 		}
@@ -33,7 +35,6 @@
 			$query = "INSERT INTO scores (nome, scoreGeral, qtdSubsDestruidos, scoreUnico, tempoJogo, tipoDispositivo) " . 
 						" VALUES ". _POSTToString($post);
 						
-			//pg_exec($conn, $query);
 			if ($stmt = $conn->prepare($query)){
 				$stmt->execute();
 			}
@@ -46,7 +47,7 @@
 	function searchScoreBy($tipo, $mostrarTodos){
 		global $conn;
 		try {
-			$txtMostrarTodos = ($mostrarTodos) ? " GROUP BY nome " : '';
+			$txtMostrarTodos = (!$mostrarTodos) ? " GROUP BY nome " : '';
 			$query = "  SELECT nome, scoreGeral, qtdSubsDestruidos, scoreUnico, tempoJogo, tipoDispositivo
 						FROM scores ". $txtMostrarTodos . " ORDER BY $tipo DESC ";
 					
