@@ -13,9 +13,9 @@ $(document).ready(function () {
 				'mostrarTodos' : mostrarTodos,
 			},function (response) {
 				var tableRanking = $("<table class='tableRanking'></table>");
-				var thead = "<thead><th>player</th><th>score Geral</th>" +
-							"<th>score Unico </th><th>Quantidade de Submarinos Destruidos</th>" +
-							"<th>Pontuação por minuto </th> <th> Dispositivo </th></thead>";
+				var thead = "<tr><td>player</td><td>score Geral</td>" +
+							"<td>score Unico </td><td>Quantidade de Submarinos Destruidos</td>" +
+							"<td>Pontuação por minuto </td> <td> Dispositivo </td></tr>";
 							
 				tableRanking.append(thead);
 				var json = $.parseJSON(response);
