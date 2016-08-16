@@ -45,7 +45,7 @@
 	function searchScoreBy($tipo, $mostrarTodos){
 		global $conn;
 		try {
-			$txtMostrarTodos = ($mostrarTodos == 'false') ? " GROUP BY nome " : '';
+			$txtMostrarTodos = ($mostrarTodos == 'false') ? " GROUP BY UPPER(nome) " : '';
 			$query = "  SELECT nome, scoreGeral, qtdSubsDestruidos, scoreUnico, tempoJogo, tipoDispositivo
 						FROM scores ". $txtMostrarTodos . " ORDER BY $tipo DESC ";
 					
