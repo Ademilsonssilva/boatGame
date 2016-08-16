@@ -79,9 +79,12 @@
 						}
 						else {
 							foreach($array as $arr) {
-								if (!(strtoupper($row['nome']) == strtoupper($arr['nome']))) {
-									$array[] = $row;
+								if (strtoupper($row['nome']) == strtoupper($arr['nome'])) {
+									$passou = false;
 								} 
+							}
+							if ($passou) {
+								$array[] = $row;
 							}
 						}
 					}else {
