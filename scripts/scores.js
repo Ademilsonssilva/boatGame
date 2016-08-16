@@ -21,12 +21,12 @@ $(document).ready(function () {
 				var json = $.parseJSON(response);
 				for(var it = 0; it < json.length; it++) {
 					var tr = "<tr> " +
-						"<td>" + json[it].nome + "<td>" +
-						"<td>" + json[it].scoreGeral + "<td>" +
-						"<td>" + json[it].scoreUnico + "<td>" +
-						"<td>" + json[it].qtdSubsDestruidos + "<td>" +
-						"<td>" + json[it].tempoJogo + "<td>" +
-						"<td>" + json[it].tipoDispositivo + "<td>" +
+						"<td>" + json[it].nome + "</td>" +
+						"<td>" + json[it].scoreGeral + "</td>" +
+						"<td>" + json[it].scoreUnico + "</td>" +
+						"<td>" + json[it].qtdSubsDestruidos + "</td>" +
+						"<td>" + json[it].tempoJogo + "</td>" +
+						"<td>" + json[it].tipoDispositivo + "</td>" +
 					"</tr>";
 					tableRanking.append(tr);
 				}
