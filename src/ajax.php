@@ -45,7 +45,7 @@
 	function searchScoreBy($tipo, $mostrarTodos){
 		global $conn;
 		try {
-			$txtMostrarTodos = ($mostrarTodos == 'false') ? " GROUP BY UPPER(nome) " : '';
+			//$txtMostrarTodos = ($mostrarTodos == 'false') ? " GROUP BY UPPER(nome) " : '';
 			$query = "  SELECT nome, scoreGeral, qtdSubsDestruidos, scoreUnico, tempoJogo, tipoDispositivo
 						FROM scores ". $txtMostrarTodos . " ORDER BY $tipo DESC ";
 					
@@ -71,7 +71,13 @@
 						'tipoDispositivo' => $tipoDispositivo,
 					];
 					
-					$array[] = $row;
+					if ($mostrarTodos == 'false') {
+						if (!in_array($row['nome'], $array)) {
+							$array[] = $row;
+						} 
+					}else {
+						$array[] = $row;
+					}
 				}
 			}
 			return json_encode($array);
