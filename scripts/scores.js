@@ -12,8 +12,15 @@ $(document).ready(function () {
 				var tableRanking = $("<table class='tableRanking'></table>");
 				var json = $.parseJSON(response);
 				for(var it = 0; it < json.length; it++) {
-					var tr = "<tr><td>"+json[it].nome+"<td></tr>";
-					tableRanking.html(tr);
+					var tr = "<tr> " +
+						"<td>" + json[it].nome + "<td>" +
+						"<td>" + json[it].scoreGeral + "<td>" +
+						"<td>" + json[it].scoreUnico + "<td>" +
+						"<td>" + json[it].qtdSubsDestruidos + "<td>" +
+						"<td>" + json[it].tempoJogo + "<td>" +
+						"<td>" + json[it].tipoDispositivo + "<td>" +
+					"</tr>";
+					tableRanking.append(tr);
 				}
 				$('#content').html(tableRanking);
 			}
