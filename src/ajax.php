@@ -15,8 +15,6 @@
 				registerScore($_POST);
 				break;
 			case 'getRanking':
-				echo $_POST['mostrarTodos'];
-				exit;
 				echo searchScoreBy($_POST['type'], $_POST['mostrarTodos']);
 				break;
 		}

@@ -6,6 +6,7 @@ $(document).ready(function () {
 		
 	function atualizaTable() {
 		var mostrarTodos = $('#mostrarTudo').is(':checked');
+		alert(mostrarTodos);
 		$("input[name='tipoPesquisa']").each(function () {
 			$(this).prop('disabled', 'disabled');
 		});
