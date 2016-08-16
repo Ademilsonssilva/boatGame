@@ -1,7 +1,8 @@
 thead {
 	font-weight:bold;
-	color:red;
+	background-color:red;
 	font-size:22px;
+	color:white;
 }
 .tableRanking {
 	border:2px solid red;
