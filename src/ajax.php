@@ -15,7 +15,7 @@
 				registerScore($_POST);
 				break;
 			case 'getRanking':
-				echo searchScoreBy($_POST['type']);
+				echo searchScoreBy($_POST['type'], $_POST['mostrarTodos']);
 				break;
 		}
 	}
@@ -43,11 +43,11 @@
 		}
 	}
 	
-	function searchScoreBy($tipo){
+	function searchScoreBy($tipo, $mostrarTodos){
 		global $conn;
 		try {
 			$query = "  SELECT nome, scoreGeral, qtdSubsDestruidos, scoreUnico, tempoJogo, tipoDispositivo
-						FROM scores GROUP BY nome ORDER BY $tipo DESC ";
+						FROM scores ". (($mostrarTodos) ? " GROUP BY nome " : '' ) . " ORDER BY $tipo DESC ";
 					
 			$array = [];
 			if ($stmt = $conn->prepare($query)) {

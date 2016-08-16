@@ -1,4 +1,19 @@
 thead {
 	font-weight:bold;
 	color:red;
+	font-size:22px;
+}
+.tableRanking {
+	border:2px solid red;
+	text-align:center;
+	border-collapse:collapse;
+	font-weight:bold;
+	width:100%;
+}
+body{
+	background-image: url(../img/sky.png);
+}
+#content{
+	max-height:300px;
+	overflow:auto;
 }

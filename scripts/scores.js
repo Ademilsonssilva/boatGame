@@ -1,6 +1,10 @@
 $(document).ready(function () {
-	
+	atualizaTable();
 	$("input[name='tipoPesquisa']").on('change', function () {
+		atualizaTable();
+	});
+		
+	function atualizaTable() {
 		var mostrarTodos = $('#mostrarTudo').is(':checked');
 		$("input[name='tipoPesquisa']").each(function () {
 			$(this).prop('disabled', 'disabled');
@@ -12,7 +16,7 @@ $(document).ready(function () {
 				'type' 	: $('.tipoPesquisa:checked').val(),
 				'mostrarTodos' : mostrarTodos,
 			},function (response) {
-				var tableRanking = $("<table class='tableRanking'></table>");
+				var tableRanking = $("<table class='tableRanking' border='2'></table>");
 				var thead = "<thead><th>player</th><th>score Geral</th>" +
 							"<th>score Unico </th><th>Subs Destruidos</th>" +
 							"<th>Pont. por minuto </th> <th> Dispositivo </th></thead>";
@@ -36,7 +40,5 @@ $(document).ready(function () {
 				});
 			}
 		)
-		
-	});
-		
+	}
 });
