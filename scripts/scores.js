@@ -25,7 +25,7 @@ $(document).ready(function () {
 					var tableRanking = $("<table class='tableRanking' border='2'></table>");
 					var thead = "<thead><th>Ranking</th><th>player</th><th>score Geral</th>" +
 								"<th>score Unico </th><th>Subs Destruidos</th>" +
-								"<th>Pont. por minuto </th> <th> Dispositivo </th></thead>";
+								"<th>Pont. por segundo </th> <th> Dispositivo </th></thead>";
 								
 					tableRanking.append(thead);
 					var json = $.parseJSON(response);
@@ -36,7 +36,7 @@ $(document).ready(function () {
 							"<td>" + json[it].scoreGeral + "</td>" +
 							"<td>" + json[it].scoreUnico + "</td>" +
 							"<td>" + json[it].qtdSubsDestruidos + "</td>" +
-							"<td>" + json[it].tempoJogo + "</td>" +
+							"<td>" + Math.round(json[it].tempoJogo) + "</td>" +
 							"<td>" + json[it].tipoDispositivo + "</td>" +
 						"</tr>";
 						tableRanking.append(tr);
