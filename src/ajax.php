@@ -45,54 +45,58 @@
 	function searchScoreBy($tipo, $mostrarTodos){
 		global $conn;
 		try {
-			//$txtMostrarTodos = ($mostrarTodos == 'false') ? " GROUP BY UPPER(nome) " : '';
-			$query = "  SELECT nome, scoreGeral, qtdSubsDestruidos, scoreUnico, tempoJogo, tipoDispositivo
-						FROM scores ". $txtMostrarTodos . " ORDER BY $tipo DESC ";
+			//if ($tipo != "tempoJogo") {
+				$query = "  SELECT nome, scoreGeral, qtdSubsDestruidos, scoreUnico, scoreGeral/tempoJogo as tempoJogo, tipoDispositivo
+							FROM scores ORDER BY $tipo DESC ";
+						
+				$array = [];
+				if ($stmt = $conn->prepare($query)) {
+					$stmt->execute();
+					$stmt->bind_result(
+						$name, 
+						$scoreGeral, 
+						$qtdSubsDestruidos, 
+						$scoreUnico, 
+						$tempoJogo, 
+						$tipoDispositivo
+					);
 					
-			$array = [];
-			if ($stmt = $conn->prepare($query)) {
-				$stmt->execute();
-				$stmt->bind_result(
-					$name, 
-					$scoreGeral, 
-					$qtdSubsDestruidos, 
-					$scoreUnico, 
-					$tempoJogo, 
-					$tipoDispositivo
-				);
-				
-				while ($stmt->fetch()) {
-					$row = [
-						'nome' => $name,
-						'scoreGeral' => $scoreGeral,
-						'qtdSubsDestruidos' => $qtdSubsDestruidos,
-						'scoreUnico' => $scoreUnico,
-						'tempoJogo' => $tempoJogo,
-						'tipoDispositivo' => $tipoDispositivo,
-					];
-					
-					$passou = true;
-					
-					if ($mostrarTodos == 'false') {
-						if (empty($array)) {
-							$array[] = $row;
-						}
-						else {
-							foreach($array as $arr) {
-								if (strtoupper($row['nome']) == strtoupper($arr['nome'])) {
-									$passou = false;
-								} 
-							}
-							if ($passou) {
+					while ($stmt->fetch()) {
+						$row = [
+							'nome' => $name,
+							'scoreGeral' => $scoreGeral,
+							'qtdSubsDestruidos' => $qtdSubsDestruidos,
+							'scoreUnico' => $scoreUnico,
+							'tempoJogo' => $tempoJogo,
+							'tipoDispositivo' => $tipoDispositivo,
+						];
+						
+						$passou = true;
+						
+						if ($mostrarTodos == 'false') {
+							if (empty($array)) {
 								$array[] = $row;
 							}
+							else {
+								foreach($array as $arr) {
+									if (strtoupper($row['nome']) == strtoupper($arr['nome'])) {
+										$passou = false;
+									} 
+								}
+								if ($passou) {
+									$array[] = $row;
+								}
+							}
+						}else {
+							$array[] = $row;
 						}
-					}else {
-						$array[] = $row;
 					}
 				}
-			}
+			//} else {
+				
+			//}
 			return json_encode($array);
+			
 		}catch (Exception $e) {
 			fwrite($file, $e->getMessage()."\n");
 		}
