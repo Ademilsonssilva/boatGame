@@ -25,7 +25,7 @@ exit;
 
 function _POSTToString($post)
 {
-   $data = Date('Y-m-d');
+   $data = Date('Y-m-d H:i:s');
    return "('{$post['playerName']}', {$post['scoreGeral']}, "
          . "{$post['qtdSubsDestruidos']}, {$post['scoreUnico']}, "
          . "{$post['tempoJogo']}, '{$post['tipoDispositivo']}', '$data')";
