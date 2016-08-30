@@ -1,6 +1,7 @@
 <?php
 
 header('Access-Control-Allow-Origin: *');
+date_default_timezone_set('America/Sao_Paulo');
 #error_reporting(E_ALL);
 include('connection.php');
 $conn = Connection::getConnection();
@@ -25,7 +26,7 @@ exit;
 
 function _POSTToString($post)
 {
-   $data = Date('Y-m-d H:i:s');
+   $data = Date('Y-m-d H:i:s', time());
    return "('{$post['playerName']}', {$post['scoreGeral']}, "
          . "{$post['qtdSubsDestruidos']}, {$post['scoreUnico']}, "
          . "{$post['tempoJogo']}, '{$post['tipoDispositivo']}', '$data')";
